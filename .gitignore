@@ -24,6 +24,8 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+res/token.ign
+DBL-Python-Library/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
