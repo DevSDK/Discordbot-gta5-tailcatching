@@ -73,15 +73,21 @@ async def myinfo(ctx):
 
 
 @client.command(pass_context=True)
-async def kill(ctx, user : discord.User):
+async def kill(ctx, user):
     global player_count
     try:
         current_user_index = player_table.index(ctx.message.author.name)
     except ValueError:
         await client.say("유저정보가 없습니다. 게임에 참여하고 있는지 확인해주세요")
     
-    target_user_index = getTarget(current_user_index) 
-    if(player_table[target_user_index] == user.name):
+    target_user_index = getTarget(current_user_index)
+    
+    if not user in player_table:
+        await client.say("유저정보가 없거나 이미 처리된 사람입니다.")
+        return
+
+
+    if(player_table[target_user_index] == user):
         await client.say("축하합니다. 올바른 상대를 잡으셨습니다. 죽인 상대에게 연락을 취해 이 사실을 알리고, 부하로 삼으십시오")
         del player_table[target_user_index]
         del color_table[target_user_index]
